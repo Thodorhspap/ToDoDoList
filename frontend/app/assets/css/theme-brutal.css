@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+/*
+ * Neo-Brutalism (Settings → Art style)
+ * Ενεργό μόνο όταν το <html> έχει την κλάση "theme-brutal".
+ * Κάθε κανόνας ξεκινά με html.theme-brutal, ώστε να κερδίζει τα scoped styles των σελίδων.
+ */
+
+html.theme-brutal {
+  --ink: #111111;
+  --paper: #fff6e0;
+  --card: #ffffff;
+  --muted: #4a4a4a;
+  --yellow: #ffd23f;
+  --red: #ff6b6b;
+  --green: #4ade80;
+  --cyan: #a5f3fc;
+  --orange: #fdba74;
+  --shadow: 6px 6px 0 var(--ink);
+  --shadow-sm: 3px 3px 0 var(--ink);
+  color-scheme: light;
+}
+
+/* ===== Φόντο: κρεμ χαρτί με κουκκίδες ===== */
+html.theme-brutal,
+html.theme-brutal body {
+  background-color: var(--paper) !important;
+}
+
+html.theme-brutal .app-root,
+html.theme-brutal .landing-container {
+  background-color: var(--paper) !important;
+  background-image: radial-gradient(rgba(17, 17, 17, 0.18) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+html.theme-brutal .app-root * {
+  font-family: 'Space Grotesk', 'Segoe UI', sans-serif !important;
+}
+
+/* ===== Κάρτες ===== */
+html.theme-brutal :is(.top-settings-bar, .add-task-widget, .fun-counter-widget, .board-card, .settings-card, .widget, .login-card, .undo-toast, .sent-panel) {
+  background: var(--card);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* Οι μεγάλες κάρτες είναι λίγο διάφανες, ώστε να φαίνονται τα σχήματα από πίσω */
+html.theme-brutal :is(.board-card, .settings-card, .widget, .add-task-widget, .login-card, .sent-panel) {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+html.theme-brutal .top-settings-bar {
+  background: var(--yellow);
+}
+
+html.theme-brutal .fun-counter-widget {
+  background: var(--yellow);
+}
+
+html.theme-brutal .fun-counter-widget:hover {
+  border-color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+html.theme-brutal .fun-counter-widget:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+html.theme-brutal :is(.board-header, .settings-header) {
+  border-bottom: 3px solid var(--ink);
+}
+
+html.theme-brutal .account-form {
+  border-top: 2px solid var(--ink);
+}
+
+/* ===== Στοιχεία λίστας ===== */
+html.theme-brutal :is(.task-item, .settings-section, .person-row, .mini-row) {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+html.theme-brutal :is(.task-item, .person-row.friend):hover {
+  background: #fffdf5;
+  border-color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+html.theme-brutal .task-item.priority-high { border-left: 10px solid var(--red); }
+html.theme-brutal .task-item.priority-medium { border-left: 10px solid var(--yellow); }
+html.theme-brutal .task-item.priority-low { border-left: 10px solid var(--green); }
+
+html.theme-brutal .person-row.active {
+  background: var(--yellow);
+  border-color: var(--ink);
+}
+
+/* ===== Κείμενα ===== */
+html.theme-brutal :is(.title, .hero-title, .widget-title, .setting-value, .person-name, .counter-number, .counter-label, .bubble-text, .task-title, .welcome-text, .undo-toast, .mini-title) {
+  color: var(--ink);
+  text-shadow: none;
+}
+
+html.theme-brutal :is(.title, .widget-title, .section-title, .hero-title) {
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+
+html.theme-brutal .section-title {
+  color: var(--ink);
+}
+
+html.theme-brutal :is(.subtitle, .hero-subtitle, .task-desc, .mini-to, .bubble-time, .counter-hint, .date-container label, .empty-small, .person-name.muted, .receipt, .section-empty, .setting-label, .week-stats, .empty-state, .no-friends p, .input-group label) {
+  color: var(--muted);
+}
+
+html.theme-brutal .current-user {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+html.theme-brutal .current-user b {
+  color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 1px 8px;
+}
+
+html.theme-brutal .week-stats b,
+html.theme-brutal .receipt.seen {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Η λέξη με το χρώμα έμφασης στους τίτλους γίνεται "αυτοκόλλητο" */
+html.theme-brutal :is(.pink-do, .accent-word, .blink-do) {
+  display: inline-block;
+  margin: 0 0.1em;
+  padding: 0 0.2em;
+  background: var(--accent);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  text-shadow: none;
+  transform: rotate(-2deg);
+}
+
+html.theme-brutal .form-msg { color: #15803d; }
+html.theme-brutal .form-msg.error { color: #dc2626; }
+html.theme-brutal .done-by { color: #15803d; font-weight: 700; }
+
+/* ===== Πεδία φορμών ===== */
+html.theme-brutal .app-root :is(input, textarea, select):not([type="checkbox"]) {
+  background-color: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  color: var(--ink);
+  box-shadow: none;
+  color-scheme: light;
+}
+
+html.theme-brutal .app-root :is(input, textarea, select):not([type="checkbox"]):focus {
+  background-color: #fffdf0;
+  border-color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+html.theme-brutal .app-root :is(input, textarea)::placeholder {
+  color: #777777;
+}
+
+html.theme-brutal .date-container input[type="date"] {
+  color: var(--ink);
+  color-scheme: light;
+}
+
+html.theme-brutal .date-container input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: none;
+}
+
+html.theme-brutal select option {
+  background-color: var(--card);
+  color: var(--ink);
+}
+
+/* ===== Κουμπιά ===== */
+html.theme-brutal .app-root :is(.settings-btn, .bar-btn, .add-btn, .primary-btn, .small-btn, .lets-go-btn, .undo-btn, .danger-btn, .cancel-btn, .icon-btn) {
+  background: var(--accent);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+  text-shadow: none;
+  opacity: 1;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+html.theme-brutal .app-root :is(.settings-btn, .bar-btn, .icon-btn) {
+  background: var(--card);
+}
+
+html.theme-brutal .app-root :is(.danger-btn, .cancel-btn, .icon-btn.danger) {
+  background: var(--red);
+}
+
+html.theme-brutal .app-root .mini-cancel {
+  background: var(--red);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  font-weight: 700;
+}
+
+html.theme-brutal .app-root .icon-btn.accept {
+  background: var(--green);
+}
+
+html.theme-brutal .app-root :is(.settings-btn, .bar-btn, .add-btn, .primary-btn, .small-btn, .lets-go-btn, .undo-btn, .danger-btn, .cancel-btn, .icon-btn):hover:not(:disabled) {
+  color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+html.theme-brutal .app-root :is(.settings-btn, .bar-btn):hover {
+  background: var(--accent);
+}
+
+html.theme-brutal .app-root :is(.danger-btn, .cancel-btn, .icon-btn.danger):hover {
+  background: var(--red);
+}
+
+html.theme-brutal .app-root :is(.settings-btn, .bar-btn, .add-btn, .primary-btn, .small-btn, .lets-go-btn, .undo-btn, .danger-btn, .cancel-btn, .icon-btn):active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+html.theme-brutal .app-root :is(.text-btn, .secondary-link-btn) {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+html.theme-brutal .app-root .danger-text {
+  color: #dc2626;
+}
+
+/* Καρτέλες και επιλογές τύπου Normal / Fewer / Off */
+html.theme-brutal :is(.tabs, .segmented) {
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  background: var(--card);
+}
+
+html.theme-brutal :is(.tabs, .segmented) button {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+html.theme-brutal :is(.tabs, .segmented) button + button {
+  border-left: 3px solid var(--ink);
+}
+
+html.theme-brutal :is(.tabs, .segmented) button.active {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+html.theme-brutal .swatch {
+  border: 3px solid var(--ink);
+}
+
+html.theme-brutal .swatch.active {
+  border-color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  transform: translate(-2px, -2px);
+}
+
+/* Διακόπτης on/off */
+html.theme-brutal .toggle-slider {
+  background: var(--card);
+  border: 2px solid var(--ink);
+}
+
+html.theme-brutal .toggle-slider::before {
+  background: var(--ink);
+  top: 2px;
+}
+
+html.theme-brutal .toggle input:checked + .toggle-slider {
+  background: var(--accent);
+}
+
+html.theme-brutal .toggle input:checked + .toggle-slider::before {
+  background: var(--ink);
+}
+
+/* Checkbox */
+html.theme-brutal .checkmark {
+  border: 3px solid var(--ink);
+  border-radius: 5px;
+  background-color: var(--card);
+}
+
+html.theme-brutal .checkbox-container input:checked ~ .checkmark {
+  background-color: var(--accent);
+  box-shadow: none;
+}
+
+/* ===== Ετικέτες (pills) και badges ===== */
+html.theme-brutal :is(.task-author, .category-tag, .priority-pill, .task-date, .done-date, .count) {
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: none;
+  font-weight: 700;
+}
+
+html.theme-brutal .task-author { background: var(--card); }
+html.theme-brutal .category-tag { background: var(--accent); }
+html.theme-brutal .task-date { background: var(--cyan); }
+html.theme-brutal .task-date.today { background: var(--orange); color: var(--ink); border-color: var(--ink); }
+html.theme-brutal .task-date.overdue { background: var(--red); color: var(--ink); border-color: var(--ink); }
+html.theme-brutal .done-date { background: #bbf7d0; }
+html.theme-brutal .priority-pill.high { background: var(--red); color: var(--ink); border-color: var(--ink); }
+html.theme-brutal .priority-pill.medium { background: var(--yellow); color: var(--ink); border-color: var(--ink); }
+html.theme-brutal .priority-pill.low { background: var(--green); color: var(--ink); border-color: var(--ink); }
+html.theme-brutal .count { background: var(--card); }
+
+html.theme-brutal :is(.new-pill, .notify-badge, .unread, .count.alert) {
+  background: #ff3b3b;
+  color: #ffffff;
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+html.theme-brutal :is(.notify-badge, .unread) {
+  line-height: 16px;
+}
+
+html.theme-brutal .avatar {
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+}
+
+/* ===== Συνομιλία ===== */
+html.theme-brutal .bubble {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+html.theme-brutal .bubble-row.mine .bubble {
+  background: var(--accent);
+  border-color: var(--ink);
+}
+
+html.theme-brutal .bubble-row.mine .bubble-time {
+  color: var(--ink);
+}
+
+/* ===== Αρχική σελίδα ===== */
+html.theme-brutal .welcome-overlay {
+  background-color: rgba(255, 246, 224, 0.85);
+}
+
+html.theme-brutal .welcome-text {
+  background: var(--accent);
+  border: 4px solid var(--ink);
+  border-radius: 12px;
+  padding: 0.2em 0.6em;
+  box-shadow: var(--shadow);
+}
+
+/* ===== Scrollbars ===== */
+html.theme-brutal :is(.tasks-list, .settings-list, .messages, .people-list, .tasks-scroll, .mini-list)::-webkit-scrollbar-track {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+}
+
+html.theme-brutal :is(.tasks-list, .settings-list, .messages, .people-list, .tasks-scroll, .mini-list)::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border-radius: 4px;
+}

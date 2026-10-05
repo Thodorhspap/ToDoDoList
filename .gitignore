@@ -1,0 +1,12 @@
+# Each part has its own .gitignore (frontend/.gitignore, backend/.gitignore).
+# These cover files that can appear at the top level.
+
+# Editors and OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
