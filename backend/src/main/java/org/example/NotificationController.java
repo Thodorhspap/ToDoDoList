@@ -19,11 +19,15 @@ public class NotificationController {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private CommunityTaskRepository communityTaskRepository;
+
     // GET: Όλες οι ειδοποιήσεις του χρήστη για τα badges
     @GetMapping("/{username}")
     public Map<String, Object> getNotifications(@PathVariable String username) {
         long newTasks = taskRepository.countByUserIdAndSeenFalse(username);
         long completedTasks = taskRepository.countBySentByAndDoneTrueAndCompletionSeenFalse(username);
+        long communityCompleted = communityTaskRepository.countByPostedByAndCompletionSeenFalse(username);
         long friendRequests = friendshipRepository.countByAddresseeAndStatus(username, Friendship.PENDING);
 
         // Μετράμε μόνο μηνύματα από τρέχοντες φίλους (αλλιώς το badge δεν θα έσβηνε ποτέ)
@@ -43,6 +47,7 @@ public class NotificationController {
         return Map.of(
                 "newTasks", newTasks,
                 "completedTasks", completedTasks,
+                "communityCompleted", communityCompleted,
                 "friendRequests", friendRequests,
                 "unreadMessages", unreadMessages,
                 "unreadByFriend", unreadByFriend

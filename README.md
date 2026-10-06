@@ -19,8 +19,14 @@ A full-stack to-do app with friends, chat and shared tasks. Add your own tasks, 
 - Chat with friends, with **Sent ✓ / Seen ✓✓** read receipts
 - **Friends Tasks:** send tasks to a friend's list, see the tasks friends sent you, and get notified when a friend finishes a task you sent them
 
+**Community Tasks**
+- A shared wall where anyone can post a task (with description, priority and category)
+- Any other user can complete it; the first one to finish it gets the credit (you can't complete your own posts)
+- Remove your own open posts, see who finished the ones you posted, and get notified when it happens
+- Completed tasks stay on the wall for 7 days
+
 **Notifications**
-- Red badges for friend requests, unread messages, new tasks from friends and completed tasks, updated every few seconds
+- Red badges for friend requests, unread messages, new tasks from friends, completed tasks and finished community posts, updated every few seconds
 
 **Look and feel**
 - Two art styles, switchable in Settings: **Glass** (dark, neon, frosted panels) and **Neo-Brutalism** (bold outlines, hard shadows, bright colors)
@@ -36,16 +42,16 @@ A full-stack to-do app with friends, chat and shared tasks. Add your own tasks, 
 ```
 ToDoDoList/
 ├── frontend/            Nuxt app
-│   ├── app/pages/       Pages: landing, login, sign-up, board, friends, friends tasks, settings
+│   ├── app/pages/       Pages: landing, login, sign-up, board, friends, friends tasks, community, settings
 │   ├── app/components/  Particle background, notification badge
 │   ├── app/composables/ Login state, settings, notifications, confetti, task helpers
 │   ├── app/plugins/     Particles, settings and notification loaders
 │   └── app/assets/css/  Neo-Brutalism theme
 └── backend/             Spring Boot API
     └── src/main/java/org/example/
-        ├── *Controller.java   REST endpoints (auth, tasks, friends, notifications, counter)
+        ├── *Controller.java   REST endpoints (auth, tasks, community, friends, notifications, counter)
         ├── *Repository.java   Database queries (Spring Data JPA)
-        └── Task, User, Friendship, Message, Counter   Database tables
+        └── Task, CommunityTask, User, Friendship, Message, Counter   Database tables
 ```
 
 ## Requirements

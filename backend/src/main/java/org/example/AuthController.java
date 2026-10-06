@@ -27,6 +27,9 @@ public class AuthController {
     private MessageRepository messageRepository;
 
     @Autowired
+    private CommunityTaskRepository communityTaskRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
@@ -142,6 +145,8 @@ public class AuthController {
         friendshipRepository.renameAddressee(oldUsername, newUsername);
         messageRepository.renameSender(oldUsername, newUsername);
         messageRepository.renameRecipient(oldUsername, newUsername);
+        communityTaskRepository.renamePoster(oldUsername, newUsername);
+        communityTaskRepository.renameCompleter(oldUsername, newUsername);
 
         return ResponseEntity.ok(Map.of(
                 "success", true,

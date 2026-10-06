@@ -120,7 +120,7 @@ html.theme-brutal .section-title {
   color: var(--ink);
 }
 
-html.theme-brutal :is(.subtitle, .hero-subtitle, .task-desc, .mini-to, .bubble-time, .counter-hint, .date-container label, .empty-small, .person-name.muted, .receipt, .section-empty, .setting-label, .week-stats, .empty-state, .no-friends p, .input-group label) {
+html.theme-brutal :is(.subtitle, .hero-subtitle, .task-desc, .mini-to, .bubble-time, .counter-hint, .date-container label, .empty-small, .person-name.muted, .receipt, .section-empty, .setting-label, .week-stats, .empty-state, .no-friends p, .input-group label, .widget-hint, .posted-date) {
   color: var(--muted);
 }
 

@@ -5,6 +5,8 @@ import { getCurrentUser } from '~/composables/useAuth'
 
 const EMPTY = () => ({
   newTasks: 0,
+  completedTasks: 0,
+  communityCompleted: 0,
   friendRequests: 0,
   unreadMessages: 0,
   unreadByFriend: {}

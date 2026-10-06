@@ -17,6 +17,10 @@
         📨 Friends Tasks
         <NotifyBadge :count="notifications.newTasks + notifications.completedTasks" />
       </button>
+      <button class="settings-btn" title="Tasks anyone can complete" @click="router.push('/community')">
+        🌍 Community
+        <NotifyBadge :count="notifications.communityCompleted" />
+      </button>
       <button class="settings-btn" title="Settings" @click="router.push('/settings')">
         ⚙️ Settings
       </button>
