@@ -14,7 +14,7 @@ A full-stack to-do app with friends, chat and shared tasks. Add your own tasks, 
 - Click any task to open its **detail panel**: edit the title, description, priority, category and due date (changes save automatically), manage its steps, complete or delete it. **Esc** closes it.
 
 **Tasks**
-- Tasks have a description, due date, priority (🔴 High / 🟡 Medium / 🟢 Low) and category
+- Tasks have a description, due date, priority (High / Medium / Low, color-coded red / yellow / green) and category
 - Filter by priority or category, and sort by newest, oldest, due date, name or priority
 - **Steps (checklists):** break a task into steps in its detail panel. The board shows the progress (e.g. ☑ 2/5), and finishing the last step gives a little confetti. Double-click a step to rename it.
 - Due-date warnings: orange **Due today** and red **Overdue** labels

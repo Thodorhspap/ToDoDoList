@@ -21,7 +21,7 @@
             <div class="form-row">
               <select v-model="newPriority">
                 <option value="">No priority</option>
-                <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.icon }} {{ p.label }}</option>
+                <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.label }}</option>
               </select>
               <input v-model="newCategory" type="text" placeholder="Category" maxlength="30" />
             </div>
@@ -67,7 +67,7 @@
                 <p v-if="task.description" class="task-desc">{{ task.description }}</p>
                 <div class="task-meta">
                   <span v-if="task.priority" class="priority-pill" :class="task.priority.toLowerCase()">
-                    {{ PRIORITIES[task.priority]?.icon }} {{ PRIORITIES[task.priority]?.label }}
+                    {{ PRIORITIES[task.priority]?.label }}
                   </span>
                   <span v-if="task.category" class="category-tag">#{{ task.category }}</span>
                   <span v-if="task.dueDate" class="task-date" :class="dueStatus(task)">{{ dueLabel(task) }}</span>

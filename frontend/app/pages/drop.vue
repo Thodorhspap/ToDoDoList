@@ -35,7 +35,7 @@
             <div class="form-row">
               <select v-model="newPriority" title="Priority">
                 <option value="">No priority</option>
-                <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.icon }} {{ p.label }}</option>
+                <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.label }}</option>
               </select>
               <input v-model="newCategory" type="text" list="categories" placeholder="Category" maxlength="30" />
               <input v-model="newDueDate" type="date" title="Due date (optional)" />
@@ -55,7 +55,7 @@
           <div class="filters">
             <select v-model="filterPriority">
               <option value="">All priorities</option>
-              <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.icon }} {{ p.label }}</option>
+              <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.label }}</option>
             </select>
             <select v-model="filterCategory">
               <option value="">All categories</option>
@@ -91,7 +91,7 @@
               <p v-if="task.description" class="task-desc">{{ task.description }}</p>
               <div v-if="hasMeta(task)" class="task-meta">
                 <span v-if="task.priority" class="priority-pill" :class="task.priority.toLowerCase()">
-                  {{ PRIORITIES[task.priority]?.icon }} {{ PRIORITIES[task.priority]?.label }}
+                  {{ PRIORITIES[task.priority]?.label }}
                 </span>
                 <span v-if="task.category" class="category-tag">#{{ task.category }}</span>
                 <span v-if="task.dueDate" class="task-date" :class="dueStatus(task)">{{ dueLabel(task) }}</span>
@@ -132,7 +132,7 @@
               <span class="task-title">{{ task.title || task.text || 'Χωρίς Τίτλο' }}</span>
               <div class="task-meta">
                 <span v-if="task.priority" class="priority-pill" :class="task.priority.toLowerCase()">
-                  {{ PRIORITIES[task.priority]?.icon }} {{ PRIORITIES[task.priority]?.label }}
+                  {{ PRIORITIES[task.priority]?.label }}
                 </span>
                 <span v-if="task.category" class="category-tag">#{{ task.category }}</span>
                 <span v-if="stepCount(task) > 0" class="steps-pill">☑ {{ stepsDone(task) }}/{{ stepCount(task) }}</span>
@@ -188,7 +188,7 @@
               <label class="field-label" for="drawer-priority">Priority</label>
               <select id="drawer-priority" v-model="draft.priority" @change="saveDraft">
                 <option value="">No priority</option>
-                <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.icon }} {{ p.label }}</option>
+                <option v-for="(p, key) in PRIORITIES" :key="key" :value="key">{{ p.label }}</option>
               </select>
             </div>
             <div class="field">

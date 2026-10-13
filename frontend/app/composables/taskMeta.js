@@ -1,9 +1,9 @@
 // Κοινά βοηθητικά για τα tasks: προτεραιότητες, ημερομηνίες λήξης, κατηγορίες
 
 export const PRIORITIES = {
-  HIGH: { label: 'High', icon: '🔴', rank: 0 },
-  MEDIUM: { label: 'Medium', icon: '🟡', rank: 1 },
-  LOW: { label: 'Low', icon: '🟢', rank: 2 }
+  HIGH: { label: 'High', rank: 0 },
+  MEDIUM: { label: 'Medium', rank: 1 },
+  LOW: { label: 'Low', rank: 2 }
 }
 
 export const priorityRank = (priority) => PRIORITIES[priority]?.rank ?? 3
