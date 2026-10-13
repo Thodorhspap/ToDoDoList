@@ -8,9 +8,15 @@ A full-stack to-do app with friends, chat and shared tasks. Add your own tasks, 
 
 ## Features
 
+**Layout**
+- A sidebar with every section (My Board, Friends Tasks, Friends, Community, Settings), notification badges, the Global Clicker and your account. On smaller screens it shrinks to icons.
+- A quick-add bar at the top of the board: type a title and press Enter (or press **N** anywhere to jump to it). The **⋯** button adds a description, priority, category and due date.
+- Click any task to open its **detail panel**: edit the title, description, priority, category and due date (changes save automatically), manage its steps, complete or delete it. **Esc** closes it.
+
 **Tasks**
-- Add tasks with a description, due date, priority (🔴 High / 🟡 Medium / 🟢 Low) and category
-- Edit tasks, filter by priority or category, and sort by newest, oldest, due date, name or priority
+- Tasks have a description, due date, priority (🔴 High / 🟡 Medium / 🟢 Low) and category
+- Filter by priority or category, and sort by newest, oldest, due date, name or priority
+- **Steps (checklists):** break a task into steps in its detail panel. The board shows the progress (e.g. ☑ 2/5), and finishing the last step gives a little confetti. Double-click a step to rename it.
 - Due-date warnings: orange **Due today** and red **Overdue** labels
 - Completing a task moves it to a **Done** tab (with an **Undo** button for 5 seconds), and the board shows how many tasks you finished this week
 
@@ -43,7 +49,8 @@ A full-stack to-do app with friends, chat and shared tasks. Add your own tasks, 
 ToDoDoList/
 ├── frontend/            Nuxt app
 │   ├── app/pages/       Pages: landing, login, sign-up, board, friends, friends tasks, community, settings
-│   ├── app/components/  Particle background, notification badge
+│   ├── app/layouts/     "app" layout with the sidebar (used after logging in), default layout without it
+│   ├── app/components/  Sidebar, particle background, notification badge
 │   ├── app/composables/ Login state, settings, notifications, confetti, task helpers
 │   ├── app/plugins/     Particles, settings and notification loaders
 │   └── app/assets/css/  Neo-Brutalism theme
@@ -51,7 +58,7 @@ ToDoDoList/
     └── src/main/java/org/example/
         ├── *Controller.java   REST endpoints (auth, tasks, community, friends, notifications, counter)
         ├── *Repository.java   Database queries (Spring Data JPA)
-        └── Task, CommunityTask, User, Friendship, Message, Counter   Database tables
+        └── Task, Subtask, CommunityTask, User, Friendship, Message, Counter   Database tables
 ```
 
 ## Requirements
@@ -113,6 +120,8 @@ All endpoints are under `http://localhost:8080/api`.
 | | `GET /auth/users` | List usernames (for suggestions) |
 | Tasks | `GET /tasks/{user}`, `POST /tasks/{user}` | A user's tasks, add a task |
 | | `PUT /tasks/{id}`, `PUT /tasks/{id}/done`, `DELETE /tasks/{id}` | Edit, complete / reopen, delete |
+| | `POST /tasks/{id}/subtasks` | Add a step to a task |
+| | `PUT /tasks/subtasks/{id}`, `DELETE /tasks/subtasks/{id}` | Tick / rename a step, delete a step |
 | | `POST /tasks/send/{friend}`, `GET /tasks/sent/{user}` | Send a task to a friend, tasks you sent |
 | | `POST /tasks/seen/{user}`, `POST /tasks/completions-seen/{user}` | Mark notifications as seen |
 | Friends | `GET /friends/{user}` | Friends, incoming and outgoing requests |

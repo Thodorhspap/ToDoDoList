@@ -1,15 +1,6 @@
 <template>
   <div class="page-container">
 
-    <ParticlesBg />
-
-    <!-- Λεπτό οριζόντιο board κορυφής -->
-    <div class="top-settings-bar">
-      <button class="bar-btn" @click="router.push('/drop')">
-        ← Back to Board
-      </button>
-    </div>
-
     <div class="board-container">
       <!-- ΑΡΙΣΤΕΡΗ ΣΤΗΛΗ -->
       <div class="left-sidebar">
@@ -136,6 +127,9 @@
 </template>
 
 <script setup>
+// Σελίδα με το πλαϊνό μενού (layouts/app.vue)
+definePageMeta({ layout: 'app' })
+
 import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { refreshNotifications, useNotifications } from '~/composables/useNotifications'
@@ -384,25 +378,6 @@ const sendMessage = async () => {
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
   gap: 1rem;
-}
-
-/* Λεπτό οριζόντιο board κορυφής */
-.top-settings-bar {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  background: rgba(28, 25, 23, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(var(--accent-rgb), 0.2);
-  padding: 0.5rem 1.5rem;
-  border-radius: 14px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  box-sizing: border-box;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  flex-shrink: 0;
 }
 
 .bar-btn {

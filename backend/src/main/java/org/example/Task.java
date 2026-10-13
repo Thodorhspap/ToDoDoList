@@ -1,7 +1,10 @@
 package org.example;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -58,6 +61,13 @@ public class Task {
     @Column(nullable = true, length = 30)
     private String category;
 
+    // Τα βήματα (checklist) του task, με τη σειρά τους. Διαγράφονται μαζί με το task.
+    // READ_ONLY: στέλνονται στο JSON, αλλά αλλάζουν μόνο από τα endpoints των βημάτων.
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OrderBy("position ASC, id ASC")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<Subtask> subtasks = new ArrayList<>();
+
     // --- Getters και Setters ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -100,4 +110,6 @@ public class Task {
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
+
+    public List<Subtask> getSubtasks() { return subtasks; }
 }

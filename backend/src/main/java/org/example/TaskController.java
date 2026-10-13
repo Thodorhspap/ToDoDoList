@@ -15,6 +15,8 @@ public class TaskController {
 
     private static final Set<String> PRIORITIES = Set.of("HIGH", "MEDIUM", "LOW");
     private static final int MAX_CATEGORY_LENGTH = 30;
+    private static final int MAX_SUBTASKS = 30;
+    private static final int MAX_SUBTASK_LENGTH = 200;
     // Πόσες μέρες βλέπει ο αποστολέας τα tasks που ολοκλήρωσαν οι φίλοι του
     private static final int SENT_COMPLETED_DAYS = 7;
 
@@ -26,6 +28,9 @@ public class TaskController {
 
     @Autowired
     private FriendshipRepository friendshipRepository;
+
+    @Autowired
+    private SubtaskRepository subtaskRepository;
 
     // GET: Φέρνει ΜΟΝΟ τα tasks του συγκεκριμένου χρήστη (ανοιχτά και ολοκληρωμένα)
     @GetMapping("/{userId}")
@@ -135,6 +140,75 @@ public class TaskController {
         task.setCompletedAt(done ? LocalDateTime.now() : null);
         task.setCompletionSeen(done && task.getSentBy() != null && !completedBySender ? Boolean.FALSE : null);
         return ResponseEntity.ok(taskRepository.save(task));
+    }
+
+    // ---------------- Βήματα (checklist) ----------------
+    // Όλα επιστρέφουν ολόκληρο το task, ώστε η σελίδα να ενημερώνει τη λίστα και την πρόοδο μαζί.
+
+    // POST: Προσθέτει ένα βήμα στο τέλος της λίστας
+    @PostMapping("/{taskId}/subtasks")
+    @Transactional
+    public ResponseEntity<?> addSubtask(@PathVariable Long taskId, @RequestBody Map<String, Object> body) {
+        Task task = taskRepository.findById(taskId).orElse(null);
+        if (task == null) {
+            return error(404, "Το task δεν βρέθηκε");
+        }
+        String text = cleanSubtaskText(body.get("text"));
+        if (text == null) {
+            return error(400, "Το βήμα δεν μπορεί να είναι κενό");
+        }
+        if (task.getSubtasks().size() >= MAX_SUBTASKS) {
+            return error(400, "Μέχρι " + MAX_SUBTASKS + " βήματα ανά task");
+        }
+
+        Subtask subtask = new Subtask();
+        subtask.setTask(task);
+        subtask.setText(text);
+        subtask.setDone(false);
+        subtask.setPosition(task.getSubtasks().stream().mapToInt(Subtask::getPosition).max().orElse(-1) + 1);
+        task.getSubtasks().add(subtaskRepository.save(subtask));
+        return ResponseEntity.ok(task);
+    }
+
+    // PUT: Τσεκάρει / ξετσεκάρει ή μετονομάζει ένα βήμα
+    @PutMapping("/subtasks/{subtaskId}")
+    @Transactional
+    public ResponseEntity<?> editSubtask(@PathVariable Long subtaskId, @RequestBody Map<String, Object> body) {
+        Subtask subtask = subtaskRepository.findById(subtaskId).orElse(null);
+        if (subtask == null) {
+            return error(404, "Το βήμα δεν βρέθηκε");
+        }
+        if (body.containsKey("text")) {
+            String text = cleanSubtaskText(body.get("text"));
+            if (text == null) {
+                return error(400, "Το βήμα δεν μπορεί να είναι κενό");
+            }
+            subtask.setText(text);
+        }
+        if (body.containsKey("done")) {
+            subtask.setDone(Boolean.TRUE.equals(body.get("done")));
+        }
+        // μέσα στο transaction οι αλλαγές αποθηκεύονται αυτόματα
+        return ResponseEntity.ok(subtask.getTask());
+    }
+
+    // DELETE: Διαγράφει ένα βήμα
+    @DeleteMapping("/subtasks/{subtaskId}")
+    @Transactional
+    public ResponseEntity<?> deleteSubtask(@PathVariable Long subtaskId) {
+        Subtask subtask = subtaskRepository.findById(subtaskId).orElse(null);
+        if (subtask == null) {
+            return error(404, "Το βήμα δεν βρέθηκε");
+        }
+        Task task = subtask.getTask();
+        task.getSubtasks().remove(subtask);   // orphanRemoval: σβήνεται από τη βάση στο τέλος του transaction
+        return ResponseEntity.ok(task);
+    }
+
+    private String cleanSubtaskText(Object value) {
+        if (!(value instanceof String text) || text.isBlank()) return null;
+        String trimmed = text.trim();
+        return trimmed.length() > MAX_SUBTASK_LENGTH ? trimmed.substring(0, MAX_SUBTASK_LENGTH) : trimmed;
     }
 
     // Κοινές ρυθμίσεις για κάθε νέο task
